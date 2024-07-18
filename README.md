@@ -37,6 +37,35 @@ A container is a unit of software that encapsulates everything needed to build, 
 - Docker images are read-only templates used to create containers.
 - Volumes and bind mounts are used to persist data in Docker.
 
+### Dockerfile Example
+
+```dockerfile
+# Use an official Python runtime as the base image
+FROM python:3.9-slim
+# Set the working directory in the container
+WORKDIR /app
+# Copy the current directory contents into the container at /app
+COPY . /app
+# Install any needed packages specified in requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
+# Make port 80 available to the world outside this container
+EXPOSE 80
+# Define environment variable
+ENV NAME World
+# Run app.py when the container launches
+CMD ["python", "app.py"]
+```
+
+#### Core Dockerfile Elements:
+
+- `FROM`: Specifies the base image to use as the starting point for this image.
+- `WORKDIR`: Sets the working directory for any subsequent ADD, COPY, CMD, ENTRYPOINT, or RUN instructions.
+- `COPY`: Copies files or directories from the host file system to the container's file system.
+- `RUN`: Executes commands in a new layer on top of the current image and commits the results.
+- `EXPOSE`: Informs Docker that the container listens on the specified network port at runtime.
+- `ENV`: Sets an environment variable in the container.
+- `CMD`: Provides defaults for an executing container. There can only be one CMD instruction in a Dockerfile.
+
 ### Basic Docker Commands
 | Command | Description | Example |
 |---------|-------------|---------|
