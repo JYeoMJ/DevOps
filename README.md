@@ -44,7 +44,7 @@ A container is a unit of software that encapsulates everything needed to build, 
 | `docker build` | Builds an image from a Dockerfile. | `docker build -t myapp:v1 .` |
 | `docker images` | Lists the images. | `docker images` |
 | `docker pull` | Pulls an image or a repository from a registry. | `docker pull ubuntu:latest` |
-| `docker push` | Pushes an image or a repository to a registry. | `docker push myregistry/myapp:1.0` |
+| `docker push` | Pushes an image or a repository to a registry. | `docker push myregistry/myapp:v1` |
 | `docker tag` | Creates a tag TARGET_IMAGE that refers to SOURCE_IMAGE | `docker tag myapp:latest myregistry/myapp:v1` |
 | `docker rmi` | Removes one or more images | `docker rmi myapp:oldversion` |
 
