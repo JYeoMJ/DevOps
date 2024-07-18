@@ -27,8 +27,15 @@ A container is a unit of software that encapsulates everything needed to build, 
 - Docker uses networks to isolate container communications. 
 - Docker uses volumes and binds mounts to persist data even after a container stops running. 
 - Plugins, such as storage plugins, provide the ability to connect to external storage platforms. 
+- The Client-Server architecture is a distributed application structure that partitions tasks or workloads between the providers of a resource or service, called servers, and service requesters, called clients.
 
 ## Docker CLI
+
+### Basic Concepts
+- A Dockerfile is used with the docker build command to create a container image.
+- A Docker container is a runnable instance of an image, created using the docker run command.
+- Docker images are read-only templates used to create containers.
+- Volumes and bind mounts are used to persist data in Docker.
 
 ### Basic Docker Commands
 | Command | Description | Example |
