@@ -1,13 +1,32 @@
 # Comprehensive DevOps Cheat Sheet: Docker, Kubernetes, and OpenShift
 
 ## Table of Contents
-1. [Docker CLI](#docker-cli)
-2. [Kubernetes Architecture](#kubernetes-architecture)
-3. [Managing Applications with Kubernetes](#managing-applications-with-kubernetes)
-4. [OpenShift CLI](#openshift-cli)
-5. [Common Workflows](#common-workflows)
-6. [Best Practices](#best-practices)
-7. [Troubleshooting Tips](#troubleshooting-tips)
+1. [Containers & Containerization](#containers--containerization)
+2. [Docker CLI](#docker-cli)
+3. [Introduction to Kubernetes](#introduction-to-kubernetes)
+4. [Kubernetes Architecture](#kubernetes-architecture)
+5. [Managing Applications with Kubernetes](#managing-applications-with-kubernetes)
+6. [The Kubernetes Ecosystem: OpenShift, Istio, etc](#the-kubernetes-ecosystem-openshift-istio-etc)
+7. [OpenShift CLI](#openshift-cli)
+8. [Common Workflows](#common-workflows)
+9. [Best Practices](#best-practices)
+10. [Troubleshooting Tips](#troubleshooting-tips)
+
+## Containers & Containerization
+
+A container is a unit of software that encapsulates everything needed to build, ship, and run applications.  
+
+- Containers lower deployment time and costs, improve utilization, automate processes, and support next-gen applications (microservices).
+- Major container vendors include Docker, Podman, LXC, and Vagrant. 
+- Docker is an open platform used for developing, shipping, and running applications as containers. 
+- Docker containers are not a good fit for applications based on monolithic architecture or applications that require high performance or security. 
+
+### Docker Architecture
+- Consists of the Docker client, the Docker host, and the container registry. 
+- The Docker host contains objects such as the Dockerfiles, images, containers, networks, storage volumes, and other objects, such as plugins and add-ons. 
+- Docker uses networks to isolate container communications. 
+- Docker uses volumes and binds mounts to persist data even after a container stops running. 
+- Plugins, such as storage plugins, provide the ability to connect to external storage platforms. 
 
 ## Docker CLI
 
@@ -64,6 +83,40 @@
 | `ibmcloud cr image-list` | Lists images in IBM Cloud Container Registry | `ibmcloud cr image-list` |
 | `ibmcloud cr image-rm` | Deletes one or more images from IBM Cloud Container Registry | `ibmcloud cr image-rm us.icr.io/mynamespace/myimage:latest` |
 
+## Introduction to Kubernetes
+
+Container orchestration automates the container lifecycle resulting in faster deployments, reduced errors, higher availability, and more robust security. 
+
+Kubernetes is a highly portable, horizontally scalable, open-source container orchestration system with automated deployment and simplified management capabilities.  
+
+### Kubernetes Architecture
+- Consists of a control plane and one or more worker planes. 
+- A control plane includes controllers, an API server, a scheduler, and an etcd. 
+- A worker plane includes nodes, a kubelet, container runtime, and kube-proxy. 
+
+### Kubernetes Objects
+- Include Namespaces, Pods, ReplicaSets, Deployments, and Services. 
+- Namespaces help in isolating groups of resources within a single cluster. 
+- Pods represent a process or an instance of an app running in the cluster. 
+- ReplicaSets create and manage horizontally scaled running Pods. 
+- Deployments provide updates for Pods and ReplicaSets. 
+- A service in Kubernetes is a REST object that provides policies for accessing the pods and cluster. 
+
+### Kubernetes Capabilities
+Include automated rollouts and rollbacks, storage orchestration, horizontal scaling, automated bin packing, secret and configuration management, Ipv4/Ipv6 dual-stack support, batch execution, self-healing, service discovery, load balancing, and extensible design. 
+
+### Kubernetes Services
+- ClusterIP provides Inter-service communication within the cluster
+- NodePort Service creates and routes the incoming requests automatically to the ClusterIP Service
+- External Load Balancer, or ELB, creates NodePort and ClusterIP Services automatically
+- External Name service represents external storage and enables Pods from different namespaces to talk to each other
+
+### Additional Kubernetes Concepts
+- Ingress is an API object that provides routing rules to manage external users' access to multiple services in a Kubernetes cluster
+- DaemonSet ensures that there is at least one copy of the pod on all nodes
+- StatefulSet manages stateful applications, manages Pod deployment and scaling, maintains a sticky identity for each Pod request and provides persistent storage volumes for your workloads
+- Job creates pods and tracks the Pod completion process; Jobs are retried until completed
+
 ## Kubernetes Architecture
 
 ### Cluster Management
@@ -94,6 +147,17 @@
 
 ## Managing Applications with Kubernetes
 
+- A ReplicaSet enables scaling by creating or deleting pods. 
+- A ReplicaSet always tries to match the actual state to the desired state. 
+- Autoscaling enables scaling as needed at the cluster or node level, and the pod level. 
+- Autoscaler types include horizontal pod (HPA), vertical pod (VPA), and cluster (CA).
+- Rolling updates roll out app changes in a controlled and automated way. 
+- Rolling updates and rollback can be performed using all-at-once and one-at-a-time strategies. 
+- ConfigMaps are used to provide variables for your application. 
+- Secrets are used to provide sensitive information to your application. 
+- Binding an external Service to your deployment automatically provides the credentials to use the Service inside the code. 
+- Binding manages configuration and credentials for back-end Services while protecting sensitive data. 
+
 ### Deployment Operations
 | Command | Description | Example |
 |---------|-------------|---------|
@@ -120,6 +184,26 @@
 |---------|-------------|---------|
 | `kubectl autoscale deployment` | Autoscales a Kubernetes Deployment | `kubectl autoscale deployment myapp --min=2 --max=5 --cpu-percent=80` |
 | `kubectl get hpa` | List all horizontal pod autoscalers | `kubectl get hpa` |
+
+## The Kubernetes Ecosystem: OpenShift, Istio, etc
+
+### OpenShift
+- OpenShift® is an enterprise-ready Kubernetes container platform built for open hybrid cloud.
+- OpenShift is easier to use, integrates with Jenkins, and has more services and features.
+
+### Custom Resources and Operators
+- Custom resource definitions (CRDs) extend the Kubernetes API. 
+- CRDs paired with custom controllers create new, declarative APIs in Kubernetes. 
+- Operators use CRDs and custom controllers to automate cluster tasks. 
+
+### OpenShift-specific Concepts
+- A build is a process that transforms inputs into an object. 
+- An ImageStream is an abstraction for referencing container images in OpenShift. 
+
+### Service Mesh and Istio
+- A service mesh provides traffic management to control the flow of traffic between services, security to encrypt traffic between services, and observability of service behavior to troubleshoot and optimize applications. 
+- Istio is a service mesh that supports four concepts of connection, security, enforcement, and observability. It is commonly used with Microservices applications. 
+- Istio provides service communication metrics for basic service monitoring needs: latency, traffic, errors, and saturation. 
 
 ## OpenShift CLI
 
